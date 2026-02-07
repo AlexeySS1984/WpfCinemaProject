@@ -23,5 +23,21 @@ namespace WpfCinemaProject
             InitializeComponent();
             MainFrame.Navigate(new Pages.MainPage());
         }
+        private void UpdateData()
+        {
+            var movies = Core.Context.Movies.ToList();
+
+            // Поиск
+            if (!string.IsNullOrWhiteSpace(SearchBox.Text))
+                movies = movies.Where(p => p.Title.ToLower().Contains(SearchBox.Text.ToLower())).ToList();
+
+            // Сортировка
+            if (SortBox.SelectedIndex == 0)
+                movies = movies.OrderBy(p => p.Title).ToList();
+            else if (SortBox.SelectedIndex == 1)
+                movies = movies.OrderByDescending(p => p.Rating).ToList();
+
+            LViewMovies.ItemsSource = movies;
+        }
     }
 }
