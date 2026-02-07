@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace WpfCinemaProject
 {
-    internal class Core
+    public static class Core
     {
+        public static CinemaDBEntities Context = new CinemaDBEntities();
+
+        public static Users CurrentUser = null;
     }
 }
